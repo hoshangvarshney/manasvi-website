@@ -1,0 +1,2 @@
+serviceClass: com.website.servlet.client.GreetingService
+path: 1DB9CC4CC7317E4BF2A96C0AB28F8000.gwt.rpc
