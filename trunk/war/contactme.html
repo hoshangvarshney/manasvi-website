@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="stylesheets/index.css" />
+<link href='http://fonts.googleapis.com/css?family=Calligraffitti'
+	rel='stylesheet' type='text/css'>
+<title>Manasvi Varshney</title>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script type="text/javascript" language="javascript"
+	src="manasvi_website/manasvi_website.nocache.js"></script>
+<script type="text/javascript">
+	function sendMsg() {
+		$("input#sendBtn").val("Sending...");
+		$("input#sendBtn").attr("disabled","disabled");
+		// check for fields' null value
+		var senderName = $("input#senderName").val().trim();
+		var senderEmail = $("input#senderEmail").val().trim();
+		var message = $("textarea#message").val().trim();
+		var fieldFlag = true;
+		if (senderName.length == 0 || senderEmail.length == 0 || message.length == 0) {
+			fieldFlag = false;
+			alert("Some fields are left blank! Please fill'em!");
+		}
+		// check for vaild email.
+		if(!validateMail(senderEmail))
+		{
+			fieldFlag = false;
+			alert("Please provide a valid email address.");
+		}
+		// check for message length (max 140)
+		if (message.length > 140) {
+			fieldFlag = false;
+			alert("Message is too long! Make sure its length is maaximum 140 characters.");
+		}
+		if (fieldFlag) {
+			var params = "sndName=" + senderName + "&sndEmail=" + senderEmail
+					+ "&msg=" + message;
+			$.ajax({
+				url : "/servlet/sendMail",
+				data : params,
+				dataType : "text",
+				type : "POST",
+				success : function(resp, status, jqXHR) {
+					if (resp.indexOf("OK|") == 0)
+						{
+						alert("Your message has been sent!");
+						clearForm();
+						}
+					else
+						alert("Message failed due to error number "
+								+ resp.split("|")[1]);
+				}
+
+			});
+		}
+		$("input#sendBtn").val("Send Message");
+		$("input#sendBtn").removeAttr("disabled");
+	}
+	function clearForm()
+	{
+		$('input#senderName').val('');
+		$('input#senderEmail').val('');
+		$('textarea#message').val('');
+	}
+	function validateMail(email)
+	{
+		var pattern = /^[a-zA-Z0-9._]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+		return pattern.test(email);
+	}
+</script>
+</head>
+<body>
+	<iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1'
+		style="position: absolute; width: 0; height: 0; border: 0"></iframe>
+	<div id="rootLayout">
+		<div id="header">
+			<div id="cover">
+				<img alt="Manasvi Varshney" src="images/bgcover_2.jpg" />
+			</div>
+			<div id="name">
+				<h1>Manasvi Varshney</h1>
+			</div>
+		</div>
+		<div id="navigation">
+			<ul class="naviBar">
+				<li><a href="index.html"><h2>Home</h2>
+						<p>Welcome to my website</p></a></li>
+				<li><a href="photos.html"><h2>Photos</h2>
+						<p>My Glimpses</p></a></li>
+				<li><a href="videos.html"><h2>Videos</h2>
+						<p>My Performances</p></a></li>
+				<li><a href="contactme.html"><h2>Contact Me</h2>
+						<p>Email etc.</p></a></li>
+			</ul>
+		</div>
+		<div id="contents">
+			<div class="contents" id="content4">
+				<table>
+					<tr>
+						<td>Your Name:</td>
+						<td><input type="text" name="senderName" id="senderName" size="30"/></td>
+					</tr>
+					<tr>
+						<td>Your Email:</td>
+						<td><input type="email" name="senderEmail" id="senderEmail" placeholder="someone@example.com" size="30"/></td>
+					</tr>
+					<tr>
+						<td>Your Message:</td>
+						<td><textarea rows="5" cols="50" name="message" id="message" placeholder="Maximum 140 characters"></textarea></td>
+					</tr>
+					<tr>
+						<td colspan="2"><input id="sendBtn" type="button" value="Send Message"
+							onclick="sendMsg()" /><input type="button" value="Reset"
+							onclick="clearForm()" /></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div id="audioPlayer">
+			<object width="167" height="300"
+				classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+				id="gsPlaylist873608640" name="gsPlaylist873608640">
+				<param name="movie" value="http://grooveshark.com/widget.swf" />
+				<param name="wmode" value="window" />
+				<param name="allowScriptAccess" value="always" />
+				<param name="flashvars"
+					value="hostname=grooveshark.com&playlistID=87360864&p=0&bbg=000000&bth=000000&pfg=000000&lfg=000000&bt=ffffff&pbg=ffffff&pfgh=ffffff&si=ffffff&lbg=ffffff&lfgh=ffffff&sb=ffffff&bfg=666666&pbgh=666666&lbgh=666666&sbh=666666" />
+				<object type="application/x-shockwave-flash"
+					data="http://grooveshark.com/widget.swf" width="167" height="300">
+					<param name="wmode" value="window" />
+					<param name="allowScriptAccess" value="always" />
+					<param name="flashvars"
+						value="hostname=grooveshark.com&playlistID=87360864&p=0&bbg=000000&bth=000000&pfg=000000&lfg=000000&bt=ffffff&pbg=ffffff&pfgh=ffffff&si=ffffff&lbg=ffffff&lfgh=ffffff&sb=ffffff&bfg=666666&pbgh=666666&lbgh=666666&sbh=666666" />
+					<span><a
+						href="http://grooveshark.com/search/playlist?q=ManasviSongs%20Hoshang%20Varshney"
+						title="ManasviSongs by Hoshang Varshney on Grooveshark">ManasviSongs
+							by Hoshang Varshney on Grooveshark</a></span>
+				</object>
+			</object>
+		</div>
+	</div>
+</body>
+</html>
