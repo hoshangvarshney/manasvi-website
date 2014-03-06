@@ -23,13 +23,13 @@
 			alert("Some fields are left blank! Please fill'em!");
 		}
 		// check for vaild email.
-		if(!validateMail(senderEmail))
+		if(fieldFlag && !validateMail(senderEmail))
 		{
 			fieldFlag = false;
 			alert("Please provide a valid email address.");
 		}
 		// check for message length (max 140)
-		if (message.length > 140) {
+		if (fieldFlag && message.length > 140) {
 			fieldFlag = false;
 			alert("Message is too long! Make sure its length is maaximum 140 characters.");
 		}
