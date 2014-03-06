@@ -33,10 +33,18 @@ public class SendEmailServlet extends HttpServlet
 		String senderName = req.getParameter("sndName");
 		String senderEmail = req.getParameter("sndEmail");
 		String message = req.getParameter("msg");
-		
+		boolean flag = false;
+		if(senderEmail != null && senderName != null && message != null)
+		{
+			flag = true;
+		}
+		else
+		{
+			flag = false;
+		}
 		message="Sender Name: "+ senderName+"\nSender Email: "+senderEmail+ "\n\n"+message;
 
-		String response = "OK|Success";
+		String response = "ERR|Invalid Parameters";
 
 		Properties props = new Properties();
 		Session session = Session.getDefaultInstance(props, null);
@@ -46,10 +54,14 @@ public class SendEmailServlet extends HttpServlet
 			Message msg = new MimeMessage(session);
 			msg.setFrom(new InternetAddress("hoshang.varshney@gmail.com", "Manasvi Website"));
 			msg.addRecipient(Message.RecipientType.TO, new InternetAddress("arnavi.varshney@gmail.com", "Arnavi Varshney"));
+			msg.addRecipient(Message.RecipientType.CC, new InternetAddress("hoshang.varshney@gmail.com", "Hoshang Varshney"));
 			msg.setSubject("Message from " + senderName + " on "+(new Date(System.currentTimeMillis()).toString()));
 			msg.setText(message);
-			Transport.send(msg);
-
+			if(flag)
+			{
+				Transport.send(msg);
+				response = "OK|Success";
+			}
 		}
 		catch (AddressException e)
 		{
